@@ -11,7 +11,8 @@ using namespace std;
  **/
 int main()
 {
-
+    bool boostUsed = false;
+    
     // game loop
     while (1) {
         int x;
@@ -33,12 +34,23 @@ int main()
         // followed by the power (0 <= thrust <= 100)
         // i.e.: "x y thrust"
         int thrust = 0;
+        bool boost = false;
         
         if(nextCheckpointAngle > 90 || nextCheckpointAngle < -90)
             thrust = 0;
+        else if(nextCheckpointAngle < 5 && nextCheckpointAngle > -5 && boostUsed == false){
+            boost = true;
+            boostUsed = true;
+        }
         else
             thrust = 100;
             
-        cout << nextCheckpointX << " " << nextCheckpointY << " " << thrust << endl;
+        cout << nextCheckpointX << " " << nextCheckpointY << " ";
+        if(boost)
+            cout << "BOOST";
+        else
+            cout << thrust;
+        
+        cout << endl;
     }
 }
